@@ -12,6 +12,10 @@ default_protocol_options = {'extract_urls_without_protocol': True}
 max_tco_slug_length = 40
 
 
+def extract_urls(text: str, options: dict = default_protocol_options) -> List[str]:
+    return [dic['url'] for dic in extract_urls_with_indices(text, options)]
+
+
 def extract_urls_with_indices(text: str, options: dict = default_protocol_options) -> List[dict]:
     if text == '' or ('.' not in text if options['extract_urls_without_protocol'] else ':' not in text):
         return []
