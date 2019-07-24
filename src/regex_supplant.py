@@ -2,10 +2,11 @@ import re
 from typing import Dict, Union, Pattern, Match
 
 
-def regex_supplant(regex: Union[str, Pattern], dic: Dict[str, Pattern], flags: re.RegexFlag = 0) -> Pattern:
+def regex_supplant(regex: Union[str, Pattern], dic: Dict[str, Union[str, Pattern]], flags: re.RegexFlag = 0) -> Pattern:
     def repl(match: Match) -> str:
         name = match.group(1)
-        return dic.get(name, re.compile('')).pattern
+        pattern = dic.get(name, '')
+        return pattern if isinstance(pattern, str) else pattern.pattern
 
     regex_str = regex if isinstance(regex, str) else regex.pattern
     new_flags = flags if isinstance(regex, str) else regex.flags | flags
