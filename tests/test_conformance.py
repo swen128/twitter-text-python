@@ -6,6 +6,7 @@ from src.extract_urls import extract_urls, extract_urls_with_indices
 from tests.utils import read_yaml
 
 extract = read_yaml('tests/cases/extract.yml')['tests']
+tlds = read_yaml('tests/cases/tlds.yml')['tests']
 
 
 def get_table(test_cases: dict, group_name: str) -> List[list]:
@@ -25,6 +26,14 @@ def test_extract_tco_urls_with_params(description: str, text: str, expected: Lis
     get_table(extract, 'urls')
 )
 def test_extract_urls(description: str, text: str, expected: List[str]):
+    assert extract_urls(text) == expected
+
+
+@pytest.mark.parametrize(
+    'description,text,expected',
+    get_table(tlds, 'country')
+)
+def test_tlds_country(description: str, text: str, expected: List[str]):
     assert extract_urls(text) == expected
 
 
