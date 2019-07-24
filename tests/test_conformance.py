@@ -16,7 +16,7 @@ def get_table(test_cases: dict, group_name: str) -> List[list]:
     'description,text,expected',
     get_table(extract, 'tco_urls_with_params')
 )
-def test_extract_tco_urls_with_params(description: str, text: str, expected: dict):
+def test_extract_tco_urls_with_params(description: str, text: str, expected: List[str]):
     assert extract_urls(text) == expected
 
 
@@ -24,7 +24,7 @@ def test_extract_tco_urls_with_params(description: str, text: str, expected: dic
     'description,text,expected',
     get_table(extract, 'urls')
 )
-def test_extract_urls(description: str, text: str, expected: dict):
+def test_extract_urls(description: str, text: str, expected: List[str]):
     assert extract_urls(text) == expected
 
 
