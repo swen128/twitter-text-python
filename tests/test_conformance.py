@@ -2,9 +2,9 @@ from typing import List
 
 import pytest
 
-from src.parse_tweet import parse_tweet
-from src.extract_urls import extract_urls, extract_urls_with_indices
 from tests.utils import read_yaml
+from twitter_text.extract_urls import extract_urls, extract_urls_with_indices
+from twitter_text.parse_tweet import parse_tweet
 
 extract = read_yaml('tests/cases/extract.yml')['tests']
 tlds = read_yaml('tests/cases/tlds.yml')['tests']
