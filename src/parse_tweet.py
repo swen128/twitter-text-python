@@ -46,16 +46,17 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> dict:
         char_index += 1
 
     weighted_length = int(weighted_length / scale)
-    normalization_offset = len(text) - len(normalized_text)
+    valid_display_offset = count_utf16_bytes(normalized_text[:valid_display_index + 1]) - 1
+    normalization_offset = count_utf16_bytes(text) - count_utf16_bytes(normalized_text)
 
     return {
         'weightedLength': weighted_length,
         'valid': valid and 0 < weighted_length <= max_weighted_tweet_length,
         'permillage': floor((weighted_length / max_weighted_tweet_length) * 1000),
         'validRangeStart': 0,
-        'validRangeEnd': valid_display_index + normalization_offset,
+        'validRangeEnd': valid_display_offset + normalization_offset,
         'displayRangeStart': 0,
-        'displayRangeEnd': len(text) - 1 if len(text) > 0 else 0
+        'displayRangeEnd': count_utf16_bytes(text) - 1 if count_utf16_bytes(text) > 0 else 0
     }
 
 
@@ -63,3 +64,5 @@ def transform_entities_to_hash(entities: List[dict]) -> Dict[int, dict]:
     return {entity['indices'][0]: entity for entity in entities}
 
 
+def count_utf16_bytes(text: str) -> int:
+    return len(text.encode('utf-16')) // 2 - 1

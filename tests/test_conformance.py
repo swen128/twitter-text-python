@@ -60,7 +60,7 @@ def test_extract_urls_with_directional_markers(description: str, text: str, expe
     get_table(validate, 'WeightedTweetsWithDiscountedEmojiCounterTest')
 )
 def test_validate_weighted_tweets_with_discounted_emoji_counter_test(description: str, text: str, expected: dict):
-    assert parse_tweet(text)['weightedLength'] == expected['weightedLength']
+    assert parse_tweet(text) == expected
 
 
 @pytest.mark.parametrize(
