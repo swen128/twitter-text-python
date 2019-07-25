@@ -1,7 +1,7 @@
 import re
 
 from dataclasses import dataclass
-from typing import List, Pattern, Tuple
+from typing import List, Tuple
 
 
 @dataclass(frozen=True)

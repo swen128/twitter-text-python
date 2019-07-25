@@ -1,5 +1,4 @@
 from typing import List, Optional
-from urllib.parse import urlparse, quote_plus
 
 from .regexp.extract_url import extract_url
 from .regexp.invalid_url_without_protocol_preceding_chars import invalid_url_without_protocol_preceding_chars
