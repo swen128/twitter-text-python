@@ -92,13 +92,13 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
             Always 0.
 
         displayRangeEnd (int)
-            UTF-16 byte length of ``text``, subtracted by one.
+            Number of UTF-16 code units in ``text``, subtracted by one.
 
         validRangeStart (int)
             Always 0.
 
         validRangeEnd (int)
-            UTF-16 byte length of the valid part of ``text``, subtracted by one.
+            Number of UTF-16 code units in the valid part of ``text``, subtracted by one.
 
             The "valid part" here means the longest valid Unicode substring starting from the leftmost of ``text``.
 
