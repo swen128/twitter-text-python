@@ -4,3 +4,4 @@ pytest
 tox
 twine
 wheel
+sphinx
