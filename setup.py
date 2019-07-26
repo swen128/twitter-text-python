@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-with open("README.md", "r") as f:
+with open("README.rst", "r") as f:
     long_description = f.read()
 
 setup(
@@ -10,7 +10,6 @@ setup(
     author_email="fujjisaaan@gmail.com",
     description="A library to parse or validate Twitter texts properly",
     long_description=long_description,
-    long_description_content_type="text/markdown",
     url="https://github.com/swen128/twitter-text-python",
     packages=find_packages(),
     install_requires=["attrs"],

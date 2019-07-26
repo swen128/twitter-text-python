@@ -30,75 +30,60 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
     Parse a Twitter text according to https://developer.twitter.com/en/docs/developer-utilities/twitter-text
 
     :param str text: A text to parse.
-    :param dict options : A dictionary to specify how to calculate weighted length. Defaults to the following value.
+    :param dict options: Parameters for counting the weighted tweet length. This must have the following properties:
 
-    .. code-block:: python
+        max_weighted_tweet_length (int)
+            Valid tweet messages must not exceed this weighted length.
 
-        {
-            "version": 3,
-            "max_weighted_tweet_length": 280,
-            "scale": 100,
-            "default_weight": 200,
-            "emoji_parsing_enabled": True,
-            "transformed_url_length": 23,
-            "ranges": [
-                {
-                    "start": 0,
-                    "end": 4351,
-                    "weight": 100
-                },
-                {
-                    "start": 8192,
-                    "end": 8205,
-                    "weight": 100
-                },
-                {
-                    "start": 8208,
-                    "end": 8223,
-                    "weight": 100
-                },
-                {
-                    "start": 8242,
-                    "end": 8247,
-                    "weight": 100
-                }
-            ]
-        }
+        default_weight (int)
+            Default weight to cover code points not defined in the ``ranges``.
 
-    :return ParsedResult: An object having the following properties
+        ranges (list of dict)
+            A list of Unicode code point ranges, with a weight associated with each of these ranges.
+            Each element of ``ranges`` must have the following attributes:
+
+                - start (int)
+                - end (int)
+                - weight (int)
+
+        scale (int)
+            The weights are divided by ``scale``.
+
+        emoji_parsing_enabled (bool)
+            When set to ``True``, it counts an emoji consisting of multiple Unicode code points as a single character,
+            resulting in a visually intuitive weighted length.
+
+        transformed_url_length (int)
+            The default length assigned to all URLs.
+
+    :return ParsedResult: An object having the following properties:
 
         weightedLength (int)
-            The Twitter text length.
-            Twitter does not accept tweet messages exceeding ``max_weighted_tweet_length``.
+            The weighted length of the twitter text.
 
-            Each Unicode character (or URL, emoji entities) in ``text`` is assigned an integer weight,
+            Each Unicode character (or URL, emoji) in ``text`` is assigned an integer weight,
             which is summed over to calculate `weightedLength`.
-
-            * Alphabetic characters should have lower weight than CJK characters.
-            * Any valid URL is assigned ``transformed_url_length``, regardless of its actual length.
-            * When ``emoji_parsing_enabled`` is true, any emoji is assigned ``default_weight``,
-              whether or not it consists of multiple Unicode code points.
 
         valid (bool)
             True if the ``text`` is valid, i.e.,
 
-            * ``weightedLength <= max_weighted_tweet_length``
-            * ``text`` does not contain invalid characters.
+            - ``weightedLength <= max_weighted_tweet_length``
+            - ``text`` does not contain invalid characters.
 
         permillage (int)
-            Equal to ``weightedLength // max_weighted_tweet_length * 1000``.
+            Equals to ``weightedLength // max_weighted_tweet_length * 1000``.
 
         displayRangeStart (int)
             Always 0.
 
         displayRangeEnd (int)
-            UTF-16 byte length of ``text``, subtracted by one.
+            Number of UTF-16 code units in ``text``, subtracted by one.
 
         validRangeStart (int)
             Always 0.
 
         validRangeEnd (int)
-            UTF-16 byte length of the valid part of ``text``, subtracted by one.
+            Number of UTF-16 code units in the valid part of ``text``, subtracted by one.
 
             The "valid part" here means the longest valid Unicode substring starting from the leftmost of ``text``.
 
