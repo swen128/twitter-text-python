@@ -13,6 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/swen128/twitter-text-python",
     packages=find_packages(),
+    install_requires=["attrs"],
     python_requires='~=3.5',
     classifiers=[
         "Programming Language :: Python :: 3.5",

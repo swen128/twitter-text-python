@@ -53,9 +53,9 @@ def test_extract_urls_with_directional_markers(description: str, text: str, expe
 
 @parametrize(validate, 'WeightedTweetsWithDiscountedEmojiCounterTest')
 def test_validate_weighted_tweets_with_discounted_emoji_counter_test(description: str, text: str, expected: dict):
-    assert parse_tweet(text) == expected
+    assert parse_tweet(text).asdict() == expected
 
 
 @parametrize(validate, 'UnicodeDirectionalMarkerCounterTest')
 def test_validate_unicode_directional_marker_counter_test(description: str, text: str, expected: dict):
-    assert parse_tweet(text) == expected
+    assert parse_tweet(text).asdict() == expected

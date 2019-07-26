@@ -2,6 +2,8 @@ import unicodedata
 from math import floor
 from typing import List, Dict
 
+import attr
+
 from .config import config
 from .extract_emojis import extract_emojis_with_indices
 from .extract_urls import extract_urls_with_indices
@@ -9,7 +11,21 @@ from .get_character_weight import get_character_weight
 from .has_invalid_characters import has_invalid_characters
 
 
-def parse_tweet(text: str, options: dict = config['defaults']) -> dict:
+@attr.s(frozen=True)
+class ParsedResult:
+    valid = attr.ib(type=bool)
+    weightedLength = attr.ib(type=int)
+    permillage = attr.ib(type=int)
+    validRangeStart = attr.ib(type=int)
+    validRangeEnd = attr.ib(type=int)
+    displayRangeStart = attr.ib(type=int)
+    displayRangeEnd = attr.ib(type=int)
+
+    def asdict(self) -> dict:
+        return attr.asdict(self)
+
+
+def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
     scale = options['scale']
     transformed_url_length = options['transformed_url_length']
     emoji_parsing_enabled = options['emoji_parsing_enabled']
@@ -49,15 +65,15 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> dict:
     valid_display_offset = count_utf16_bytes(normalized_text[:valid_display_index + 1]) - 1
     normalization_offset = count_utf16_bytes(text) - count_utf16_bytes(normalized_text)
 
-    return {
-        'weightedLength': weighted_length,
-        'valid': valid and 0 < weighted_length <= max_weighted_tweet_length,
-        'permillage': floor((weighted_length / max_weighted_tweet_length) * 1000),
-        'validRangeStart': 0,
-        'validRangeEnd': valid_display_offset + normalization_offset,
-        'displayRangeStart': 0,
-        'displayRangeEnd': count_utf16_bytes(text) - 1 if count_utf16_bytes(text) > 0 else 0
-    }
+    return ParsedResult(
+        weightedLength=weighted_length,
+        valid=valid and 0 < weighted_length <= max_weighted_tweet_length,
+        permillage=floor((weighted_length / max_weighted_tweet_length) * 1000),
+        validRangeStart=0,
+        validRangeEnd=valid_display_offset + normalization_offset,
+        displayRangeStart=0,
+        displayRangeEnd=count_utf16_bytes(text) - 1 if count_utf16_bytes(text) > 0 else 0
+    )
 
 
 def transform_entities_to_hash(entities: List[dict]) -> Dict[int, dict]:
