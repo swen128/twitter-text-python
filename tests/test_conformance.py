@@ -8,7 +8,7 @@ from twitter_text import parse_tweet, extract_urls, extract_urls_with_indices
 
 def read_yaml(path) -> dict:
     with open(path, mode='r', encoding='utf-8') as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 
 def get_table(test_cases: dict, group_name: str) -> List[list]:
