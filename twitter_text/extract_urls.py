@@ -7,16 +7,15 @@ from .regexp.valid_tco_url import valid_tco_url
 
 default_protocol = 'https://'
 max_url_length = 4096
-default_protocol_options = {'extract_urls_without_protocol': True}
 max_tco_slug_length = 40
 
 
-def extract_urls(text: str, options: dict = default_protocol_options) -> List[str]:
-    return [dic['url'] for dic in extract_urls_with_indices(text, options)]
+def extract_urls(text: str, extract_urls_without_protocol: bool = True) -> List[str]:
+    return [dic['url'] for dic in extract_urls_with_indices(text, extract_urls_without_protocol)]
 
 
-def extract_urls_with_indices(text: str, options: dict = default_protocol_options) -> List[dict]:
-    if text == '' or ('.' not in text if options['extract_urls_without_protocol'] else ':' not in text):
+def extract_urls_with_indices(text: str, extract_urls_without_protocol: bool = True) -> List[dict]:
+    if text == '' or ('.' not in text if extract_urls_without_protocol else ':' not in text):
         return []
 
     urls = []
@@ -31,7 +30,7 @@ def extract_urls_with_indices(text: str, options: dict = default_protocol_option
 
         # extract ASCII-only domains.
         if protocol is None:
-            if (not options['extract_urls_without_protocol']) or \
+            if not extract_urls_without_protocol or \
                     invalid_url_without_protocol_preceding_chars.match(before):
                 continue
 
