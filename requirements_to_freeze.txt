@@ -1,4 +1,5 @@
 pyYAML
 pytest
+tox
 twine
 wheel
