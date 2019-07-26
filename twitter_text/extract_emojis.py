@@ -5,7 +5,7 @@ from .regexp.emoji import emoji
 
 def extract_emojis_with_indices(text: str) -> List[dict]:
     """
-    Extract emojis present in ``text`` along with indices of the emojis.
+    Extract emojis present in ``text`` along with their Unicode code point indices.
 
     >>> extract_emojis_with_indices('text 😷')
     {'emoji': '😷', 'indices': [5, 6]}
