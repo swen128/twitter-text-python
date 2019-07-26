@@ -104,7 +104,7 @@ def get_ranges(nums: List[int]) -> List[Tuple[int, int]]:
     return [(l, h) for l, h in zip(lows, highs)]
 
 
-with open('resources/emoji-test.txt', 'r', encoding='utf-8') as file:
+with open('twitter_text/regexp/emoji-test.txt', 'r', encoding='utf-8') as file:
     emoji_raw = file.read()
 
 emoji_list = parse_emoji_list(emoji_raw)
