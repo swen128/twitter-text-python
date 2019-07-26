@@ -1,6 +1,10 @@
 twitter-text-python
 ===================
 
+.. image:: https://readthedocs.org/projects/twitter-text-python/badge/?version=latest
+:target: https://twitter-text-python.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
+
 This is a Python port of the `twitter/twitter-text`_ libraries, fully compliant with the `official conformance test suite`_.
 
 
@@ -26,6 +30,8 @@ TBD
 
 Examples
 --------
+
+See `the API reference <https://twitter-text-python.readthedocs.io/#module-twitter_text>`_ for more details.
 
 .. code-block:: python
 
