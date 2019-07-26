@@ -11,10 +11,38 @@ max_tco_slug_length = 40
 
 
 def extract_urls(text: str, extract_urls_without_protocol: bool = True) -> List[str]:
+    """
+    Extract valid URLs present in ``text``.
+    
+    >>> extract_urls('http://twitter.com/これは日本語です。example.com中国語')
+    ["url": "http://twitter.com/", "example.com"]
+    """
     return [dic['url'] for dic in extract_urls_with_indices(text, extract_urls_without_protocol)]
 
 
 def extract_urls_with_indices(text: str, extract_urls_without_protocol: bool = True) -> List[dict]:
+    """
+    Extract valid URLs present in ``text`` along with indices of the URLs.
+
+    :param str text:
+    :param bool extract_urls_without_protocol:
+
+    :return list of dict: Each dict contains an extracted URL and its Unicode code point indices in ``text``.
+
+    Example:
+
+    >>> extract_urls_with_indices('http://twitter.com/これは日本語です。example.com中国語')
+    [
+        {
+            "url": "http://twitter.com/",
+            "indices": [0, 19]
+        },
+        {
+            "url": "example.com",
+            "indices": [28, 39]
+        }
+    ]
+    """
     if text == '' or ('.' not in text if extract_urls_without_protocol else ':' not in text):
         return []
 

@@ -26,6 +26,96 @@ class ParsedResult:
 
 
 def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
+    """
+    Parse a Twitter text according to https://developer.twitter.com/en/docs/developer-utilities/twitter-text
+
+    :param str text: A text to parse.
+    :param dict options : A dictionary to specify how to calculate weighted length. Defaults to the following value.
+
+    .. code-block:: python
+
+        {
+            "version": 3,
+            "max_weighted_tweet_length": 280,
+            "scale": 100,
+            "default_weight": 200,
+            "emoji_parsing_enabled": True,
+            "transformed_url_length": 23,
+            "ranges": [
+                {
+                    "start": 0,
+                    "end": 4351,
+                    "weight": 100
+                },
+                {
+                    "start": 8192,
+                    "end": 8205,
+                    "weight": 100
+                },
+                {
+                    "start": 8208,
+                    "end": 8223,
+                    "weight": 100
+                },
+                {
+                    "start": 8242,
+                    "end": 8247,
+                    "weight": 100
+                }
+            ]
+        }
+
+    :return ParsedResult: An object having the following properties
+
+        weightedLength (int)
+            The Twitter text length.
+            Twitter does not accept tweet messages exceeding ``max_weighted_tweet_length``.
+
+            Each Unicode character (or URL, emoji entities) in ``text`` is assigned an integer weight,
+            which is summed over to calculate `weightedLength`.
+
+            * Alphabetic characters should have lower weight than CJK characters.
+            * Any valid URL is assigned ``transformed_url_length``, regardless of its actual length.
+            * When ``emoji_parsing_enabled`` is true, any emoji is assigned ``default_weight``,
+              whether or not it consists of multiple Unicode code points.
+
+        valid (bool)
+            True if the ``text`` is valid, i.e.,
+
+            * ``weightedLength <= max_weighted_tweet_length``
+            * ``text`` does not contain invalid characters.
+
+        permillage (int)
+            Equal to ``weightedLength // max_weighted_tweet_length * 1000``.
+
+        displayRangeStart (int)
+            Always 0.
+
+        displayRangeEnd (int)
+            UTF-16 byte length of ``text``, subtracted by one.
+
+        validRangeStart (int)
+            Always 0.
+
+        validRangeEnd (int)
+            UTF-16 byte length of the valid part of ``text``, subtracted by one.
+
+            The "valid part" here means the longest valid Unicode substring starting from the leftmost of ``text``.
+
+
+    Example:
+
+    >>> parse_tweet('english text 日本語 😷 https://example.com')
+    ParsedResult(
+        weightedLength=46,
+        valid=True,
+        permillage=164,
+        validRangeStart=0,
+        validRangeEnd=38,
+        displayRangeStart=0,
+        displayRangeEnd=38
+    )
+    """
     scale = options['scale']
     transformed_url_length = options['transformed_url_length']
     emoji_parsing_enabled = options['emoji_parsing_enabled']
