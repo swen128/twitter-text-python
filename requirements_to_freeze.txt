@@ -1,0 +1,6 @@
+attrs
+pyYAML
+pytest
+tox
+twine
+wheel

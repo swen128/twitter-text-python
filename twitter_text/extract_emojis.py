@@ -4,6 +4,15 @@ from .regexp.emoji import emoji
 
 
 def extract_emojis_with_indices(text: str) -> List[dict]:
+    """
+    Extract emojis present in ``text`` along with indices of the emojis.
+
+    >>> extract_emojis_with_indices('text 😷')
+    {'emoji': '😷', 'indices': [5, 6]}
+
+    >>> extract_emojis_with_indices('🙋🏽👨‍🎤')
+    [{'emoji': '🙋🏽', 'indices': [0, 2]}, {'emoji': '👨\u200d🎤', 'indices': [2, 5]}]
+    """
     def generator():
         for match in emoji.finditer(text):
             yield {

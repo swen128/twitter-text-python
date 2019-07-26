@@ -1,17 +1,9 @@
 import re
 
-from dataclasses import dataclass
+from collections import namedtuple
 from typing import List, Tuple
 
-
-@dataclass(frozen=True)
-class Emoji:
-    group: str
-    sub_group: str
-    name: str
-    status: str
-    codepoint: str
-    emoji: str
+Emoji = namedtuple('Emoji', ('group', 'sub_group', 'name', 'status', 'codepoint', 'emoji'))
 
 
 def parse_emoji_list(text: str) -> List[Emoji]:
@@ -112,7 +104,7 @@ def get_ranges(nums: List[int]) -> List[Tuple[int, int]]:
     return [(l, h) for l, h in zip(lows, highs)]
 
 
-with open('resources/emoji-test.txt', 'rt') as file:
+with open('resources/emoji-test.txt', 'r', encoding='utf-8') as file:
     emoji_raw = file.read()
 
 emoji_list = parse_emoji_list(emoji_raw)
