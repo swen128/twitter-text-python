@@ -1,8 +1,8 @@
-import os
 import re
-
 from collections import namedtuple
 from typing import List, Tuple
+
+import pkg_resources
 
 Emoji = namedtuple('Emoji', ('group', 'sub_group', 'name', 'status', 'codepoint', 'emoji'))
 
@@ -105,10 +105,7 @@ def get_ranges(nums: List[int]) -> List[Tuple[int, int]]:
     return [(l, h) for l, h in zip(lows, highs)]
 
 
-path = os.path.join(os.path.dirname(__file__), 'emoji-test.txt')
-with open(path, 'r', encoding='utf-8') as file:
-    emoji_raw = file.read()
-
+emoji_raw = pkg_resources.resource_string(__name__, 'emoji-test.txt').decode('utf-8')
 emoji_list = parse_emoji_list(emoji_raw)
 emoji_dict = {x.emoji: x for x in emoji_list}
 
