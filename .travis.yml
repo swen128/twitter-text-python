@@ -1,0 +1,21 @@
+dist: xenial
+language: python
+matrix:
+  include:
+    - python: 3.5
+      env: TOXENV=py35
+    - python: 3.6
+      env: TOXENV=py36
+    - python: 3.7
+      env: TOXENV=py37
+install:
+  - pip install -r requirements.txt
+script:
+  - tox
+deploy:
+  provider: pypi
+  user: swen128
+  password:
+    secure: aVLuBs1u1W/7inZBwI9ezvFNJN9OO4iwtwOJuopR/mm2EaHhKYapLC1q5FukKiy8/Of1tXODmGHFvqdC7rQnnnpO3qDr0c4Bt9gRZQorjIxMGrPsk9cdyJ4oQy8PNtL5KvkPQcLKXabPg2gjyShdmdE65hNZg5L0KkltiiUv8qwetbj4JEearoWDkiK1lzgxUFdMnV9C83Fz/IOjIrxfJltwDeYPxeEL9+3zZEuCrjqigIVXrbLCzy3wOm/BuncFIqbQL1IszLI4y/6lJ7GDOpc0+EH3I0kdlOHiTopLouxvlwe7dJ6KMcX6BAQnBKi8yctNGa7fyDJ8LMIvDqpecem+WUKTFYaopmBY/DAmNG/XjlOzghPsDxWgLGD1tMppPVcYSeKpQIlx4YihDFXPQhmncusfY5DmMw3MeQVJT3bC8/+pKkTIdxAC1PO6l5xzn3K9uc1mj07x/irW+PgmKSRpibWwAKmR/YGaPhG7m1SBATKDxPPtte04W1IN4uJkU6R6V5rE+PYiRtL0+T3ul96DictP6Lk4oRPyyVaUio75pMeGEmNpu5ohmBuifFYvab/cHRNg1/hTuLa84T27qMnfdH3NzHFzLwgPwUyAkBGsThP2tOTtjT81mnsJkjIc5BTt9WftvGhRgGAeGO1oHSAJ9s4rDD6Sy0vK/7VaWhU=
+  on:
+    tags: true
