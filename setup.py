@@ -4,7 +4,7 @@ with open("README.rst", "r") as f:
     long_description = f.read()
 
 setup(
-    name="twitter-text",
+    name="twitter-text-parser",
     version="0.0.1",
     author="swen128",
     author_email="fujjisaaan@gmail.com",
