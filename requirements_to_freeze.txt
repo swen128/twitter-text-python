@@ -5,3 +5,5 @@ tox
 twine
 wheel
 sphinx
+sphinx-rtd-theme
+docutils<=0.15

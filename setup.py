@@ -22,5 +22,8 @@ setup(
         "Operating System :: OS Independent",
         "Intended Audience :: Developers",
         "Topic :: Text Processing"
-    ]
+    ],
+    package_data={
+        'twitter_text.regexp': ['*.txt']
+    }
 )
