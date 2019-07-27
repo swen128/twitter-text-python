@@ -28,7 +28,8 @@ Usage
 Installation
 ------------
 
-.. code-block:: shell
+.. code-block:: console
+
     $ pip install twitter-text-parser
 
 
