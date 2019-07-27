@@ -2,8 +2,11 @@ twitter-text-python
 ===================
 
 .. image:: https://readthedocs.org/projects/twitter-text-python/badge/?version=latest
-  :target: https://twitter-text-python.readthedocs.io/en/latest/?badge=latest
-  :alt: Documentation Status
+    :target: https://twitter-text-python.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
+.. image:: https://travis-ci.com/swen128/twitter-text-python.svg?branch=master
+    :target: https://travis-ci.com/swen128/twitter-text-python
 
 This is a Python port of the `twitter/twitter-text`_ libraries, fully compliant with the `official conformance test suite`_.
 
@@ -25,7 +28,8 @@ Usage
 Installation
 ------------
 
-TBD
+.. code-block:: shell
+    $ pip install twitter-text-parser
 
 
 Examples
