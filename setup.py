@@ -5,7 +5,7 @@ with open("README.rst", "r") as f:
 
 setup(
     name="twitter-text-parser",
-    version="0.0.1",
+    version="1.0.0",
     author="swen128",
     author_email="fujjisaaan@gmail.com",
     description="A library to parse or validate Twitter texts properly",
