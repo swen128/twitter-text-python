@@ -1,3 +1,4 @@
+import re
 import unicodedata
 from math import floor
 from typing import List, Dict
@@ -23,6 +24,10 @@ class ParsedResult:
 
     def asdict(self) -> dict:
         return attr.asdict(self)
+
+
+def convert_line_ending(string, to="\n"):
+    return re.sub(r'\r\n|\r|\n', to, string)
 
 
 def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
@@ -106,7 +111,7 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
     emoji_parsing_enabled = options['emoji_parsing_enabled']
     max_weighted_tweet_length = options['max_weighted_tweet_length']
 
-    normalized_text = unicodedata.normalize('NFC', text)
+    normalized_text = convert_line_ending(unicodedata.normalize('NFC', text))
 
     url_entities_map = transform_entities_to_hash(extract_urls_with_indices(normalized_text))
     emoji_entities_map = transform_entities_to_hash(extract_emojis_with_indices(normalized_text))
