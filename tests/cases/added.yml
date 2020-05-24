@@ -1,0 +1,79 @@
+tests:
+  ExtractUrlsWithIndices:
+    - description: "t.co URL immediately followed by another t.co URL"
+      text: "https://t.co/slug/https://t.co/slug"
+      expected:
+        - url: "https://t.co/slug"
+          indices: [0, 17]
+  ParseTweet:
+    - description: "A URL containing emojis"
+      text: "https://😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷.jp"
+      expected:
+        weightedLength: 23
+        valid: true
+        permillage: 82
+        displayRangeStart: 0
+        displayRangeEnd: 62
+        validRangeStart: 0
+        validRangeEnd: 62
+    - description: "Hangul syllables such as gag (which may be a single character, or a sequence of conjoining jamos)"
+      text: "각각"
+      expected:
+        weightedLength: 4
+        valid: true
+        permillage: 14
+        displayRangeStart: 0
+        displayRangeEnd: 5
+        validRangeStart: 0
+        validRangeEnd: 5
+    - description: "One grapheme cluster composed of two Unicode code points (in Normalized Form C)"
+      text: "\u1E9B\u0323"
+      expected:
+        weightedLength: 3
+        valid: true
+        permillage: 10
+        displayRangeStart: 0
+        displayRangeEnd: 1
+        validRangeStart: 0
+        validRangeEnd: 1
+  ExtendedGraphemeClusters:
+    - description: "Tamil 'ni'"
+      text: "நிநி"
+      expected:
+        weightedLength: 4
+        valid: true
+        permillage: 14
+        displayRangeStart: 0
+        displayRangeEnd: 3
+        validRangeStart: 0
+        validRangeEnd: 3
+    - description: "Thai 'e'"
+      text: "เเ"
+      expected:
+        weightedLength: 2
+        valid: true
+        permillage: 7
+        displayRangeStart: 0
+        displayRangeEnd: 1
+        validRangeStart: 0
+        validRangeEnd: 1
+    - description: "Devanagari letter 'ssi'"
+      text: "षिषि"
+      expected:
+        weightedLength: 4
+        valid: true
+        permillage: 14
+        displayRangeStart: 0
+        displayRangeEnd: 3
+        validRangeStart: 0
+        validRangeEnd: 3
+    - description: "Thai 'kam'"
+      text: "กำกำ"
+      expected:
+        weightedLength: 4
+        valid: true
+        permillage: 14
+        displayRangeStart: 0
+        displayRangeEnd: 3
+        validRangeStart: 0
+        validRangeEnd: 3
