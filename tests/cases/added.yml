@@ -6,6 +6,16 @@ tests:
         - url: "https://t.co/slug"
           indices: [0, 17]
   ParseTweet:
+    - description: "CRLF character"
+      text: "a\r\nb"
+      expected:
+        weightedLength: 3
+        valid: true
+        permillage: 10
+        displayRangeStart: 0
+        displayRangeEnd: 3
+        validRangeStart: 0
+        validRangeEnd: 3
     - description: "A URL containing emojis"
       text: "https://😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷😷.jp"
       expected:
