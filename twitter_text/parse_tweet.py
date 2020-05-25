@@ -108,6 +108,7 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
     """
     scale = options['scale']
     transformed_url_length = options['transformed_url_length']
+    default_weight = options['default_weight']
     emoji_parsing_enabled = options['emoji_parsing_enabled']
     max_weighted_tweet_length = options['max_weighted_tweet_length']
 
@@ -128,7 +129,7 @@ def parse_tweet(text: str, options: dict = config['defaults']) -> ParsedResult:
             char_index += len(url) - 1
         elif emoji_parsing_enabled and char_index in emoji_entities_map:
             emoji = emoji_entities_map[char_index]['emoji']
-            weighted_length += get_character_weight(emoji[0], options)
+            weighted_length += default_weight
             char_index += len(emoji) - 1
         else:
             weighted_length += get_character_weight(normalized_text[char_index], options)
