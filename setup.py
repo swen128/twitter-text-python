@@ -15,9 +15,8 @@ setup(
     install_requires=[
         "attrs~=19.3.0"
     ],
-    python_requires='~=3.5',
+    python_requires='~=3.6',
     classifiers=[
-        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "License :: OSI Approved :: MIT License",
