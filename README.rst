@@ -5,8 +5,11 @@ twitter-text-python
     :target: https://twitter-text-python.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-.. image:: https://travis-ci.com/swen128/twitter-text-python.svg?branch=master
-    :target: https://travis-ci.com/swen128/twitter-text-python
+.. image:: https://github.com/swen128/twitter-text-python/actions/workflows/test.yml/badge.svg
+    :target: https://github.com/swen128/twitter-text-python/actions/workflows/test.yml
+
+.. image:: https://github.com/swen128/twitter-text-python/actions/workflows/release.yml/badge.svg
+    :target: https://github.com/swen128/twitter-text-python/actions/workflows/release.yml
 
 This is a Python port of the `twitter/twitter-text`_ libraries, fully compliant with the `official conformance test suite`_.
 
