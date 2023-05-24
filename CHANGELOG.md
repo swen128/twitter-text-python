@@ -1,4 +1,9 @@
 # Change Log
+## [3.0.0] - 2023-05-24
+- [change] Drop support of Python 3.6.
+- [change] Support Python 3.10 and 3.11.
+- [change] Remove dependency on the package `attrs`.
+
 ## [2.0.1] - 2023-05-24
 - [fix] Loosen the version requirement of the package `attrs`.
 

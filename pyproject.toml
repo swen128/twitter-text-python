@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "twitter-text-parser"
-version = "2.0.1"
+version = "3.0.0"
 description = "A library to parse or validate Twitter texts properly"
 authors = ["swen128 <fujjisaaan@gmail.com>"]
 readme = "README.rst"
