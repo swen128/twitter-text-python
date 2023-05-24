@@ -1,4 +1,7 @@
 # Change Log
+## [2.0.1] - 2023-05-24
+- [fix] Loosen the version requirement of the package `attrs`.
+
 ## [2.0.0] - 2021-03-29
 - [change] Drop support of Python 3.5.
 - [change] Support Python 3.8 and 3.9.
