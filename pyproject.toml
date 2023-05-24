@@ -1,0 +1,40 @@
+[tool.poetry]
+name = "twitter-text-parser"
+version = "2.0.1"
+description = "A library to parse or validate Twitter texts properly"
+authors = ["swen128 <fujjisaaan@gmail.com>"]
+readme = "README.rst"
+repository = "https://github.com/swen128/twitter-text-python"
+packages = [
+    {include = "twitter_text"},
+]
+classifiers = [
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Topic :: Text Processing"
+]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.group.test.dependencies]
+pyyaml = "^6.0"
+pytest = "^7.3.1"
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+sphinx = {version = "^6.2.1", python = "^3.8"}
+docutils = "^0.18"
+sphinx-rtd-theme = "^1.2.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
