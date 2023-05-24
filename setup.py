@@ -13,7 +13,7 @@ setup(
     url="https://github.com/swen128/twitter-text-python",
     packages=find_packages(),
     install_requires=[
-        "attrs~=19.3.0"
+        "attrs>=19.3.0"
     ],
     python_requires='~=3.6',
     classifiers=[
