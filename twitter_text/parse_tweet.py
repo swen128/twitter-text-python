@@ -1,9 +1,8 @@
 import re
 import unicodedata
+from dataclasses import dataclass, asdict
 from math import floor
 from typing import List, Dict
-
-import attr
 
 from .config import config
 from .extract_emojis import extract_emojis_with_indices
@@ -12,18 +11,18 @@ from .get_character_weight import get_character_weight
 from .has_invalid_characters import has_invalid_characters
 
 
-@attr.s(frozen=True)
+@dataclass(frozen=True)
 class ParsedResult:
-    valid = attr.ib(type=bool)
-    weightedLength = attr.ib(type=int)
-    permillage = attr.ib(type=int)
-    validRangeStart = attr.ib(type=int)
-    validRangeEnd = attr.ib(type=int)
-    displayRangeStart = attr.ib(type=int)
-    displayRangeEnd = attr.ib(type=int)
+    valid: bool
+    weightedLength: int
+    permillage: int
+    validRangeStart: int
+    validRangeEnd: int
+    displayRangeStart: int
+    displayRangeEnd: int
 
     def asdict(self) -> dict:
-        return attr.asdict(self)
+        return asdict(self)
 
 
 def convert_line_ending(string, to="\n"):
