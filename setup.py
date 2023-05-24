@@ -12,12 +12,8 @@ setup(
     long_description=long_description,
     url="https://github.com/swen128/twitter-text-python",
     packages=find_packages(),
-    install_requires=[
-        "attrs>=19.3.0"
-    ],
-    python_requires='~=3.6',
+    python_requires='~=3.7',
     classifiers=[
-        "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
